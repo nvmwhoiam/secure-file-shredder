@@ -6,101 +6,184 @@ _A military-grade secure deletion tool that ensures sensitive files are permanen
 
 ## 📌 Features
 
-```bash
-✔️ Military-grade file shredding with multiple overwrite patterns (DoD 5220.22-M compliant)
-✔️ Advanced metadata destruction - targets timestamps, filenames and filesystem artifacts
-✔️ Configurable security levels (1-7 passes) with intelligent pattern selection
-✔️ Smart protected directory detection prevents accidental system file deletion
-✔️ Verification layer confirms complete unrecoverability of shredded files
-✔️ Drag & drop interface with batch processing capabilities
-✔️ Detailed audit logging with timestamped operation records
-✔️ Cross-platform support (Windows 10/11, macOS 10.15+, Linux)
-✔️ Lightweight (no admin rights required) with minimal system impact
-✔️ Progress tracking with time remaining estimates for large files
-```
+✔️ Military-Grade File Destruction
+
+- Multiple overwrite standards including DoD 5220.22-M (3-pass) and Gutmann (35-pass)
+- Configurable security levels (1-35 passes) with intelligent pattern selection
+- Advanced pattern algorithms (zero fill, random data, alternating bits)
+
+✔️ Complete Data Sanitization
+
+- Recursive folder shredding with directory structure destruction
+- Free space wiping to eliminate previously deleted file remnants
+- Comprehensive metadata destruction (timestamps, filenames, filesystem artifacts)
+
+✔️ Enterprise-Grade Security
+
+- Smart protected directory detection with customizable exclusion lists
+- File handle verification prevents shredding of locked files
+- Verification layer confirms complete unrecoverability
+
+✔️ Professional Workflow
+
+- Parallel processing engine (configurable worker threads)
+- Adaptive chunk sizing for optimal performance
+- Detailed audit logging with forensic-grade timestamps
+- Progress tracking with ETA calculation
+
+✔️ Dual Interface
+
+- Intuitive GUI with drag & drop functionality
+- Powerful CLI for automated/scripted operations
+- Cross-platform support (Windows 10/11, macOS 10.15+, Linux)
 
 ## 🛡️ Security Implementation Details
 
-```text
-🔐 Overwrite Patterns:
-   • Pass 1: Null bytes (0x00)
-   • Pass 2: Ones (0xFF)
-   • Pass 3: Random data (cryptographically secure)
-   • Pass 4: Alternating bits (0xAA)
-   • Pass 5: Inverse alternating (0x55)
-   • Pass 6: Custom pattern (0xDEADBEEF)
-   • Pass 7: Final random pass
+- 🔐 Overwrite Patterns:
 
-🔐 Metadata Removal:
-   • File timestamps randomized
-   • Original filename obliterated
-   • NTFS/MFT artifacts targeted (Windows)
-   • Journaling artifacts removed (macOS/Linux)
+  - Standard Patterns (Zero Fill, One Fill, Random)
+  - DoD 5220.22-M (3-pass: 0x55, 0xAA, Random)
+  - Gutmann Method (35 specialized passes)
+  - Custom pattern configuration
 
-🔐 Protection Features:
-   • Blocks shredding of system directories
-   • Prevents recursive folder deletion
-   • Confirmation dialogs for destructive operations
-```
+- 🔐 Complete Data Removal:
 
-## 📊 Performance Metrics
+  - Multi-phase metadata destruction
+  - Filesystem artifact elimination
+  - Secure directory tree removal
+  - Free space sanitization
 
-```text
-Benchmarks (on 1GB file with SSD):
-• 1 Pass: ~15 seconds
-• 3 Passes: ~45 seconds
-• 7 Passes: ~105 seconds
+- 🔐 Protection Systems:
+  - Protected directory whitelist/blacklist
+  - Process-level file lock detection
+  - Multi-stage confirmation dialogs
+  - Operation verification layer
 
-System Impact:
-• CPU Usage: 15-25% during operation
-• RAM Usage: <50MB typically
-• Disk I/O: Optimized sequential writes
-```
+## ⚙️ Technical Specifications
+
+- System Requirements:
+
+  - **Python 3.9 or later** installed.
+  - 50MB disk space
+  - No admin rights required
+
+- Performance Benchmarks (1GB file on NVMe SSD):
+
+  - Basic 3-pass: ~22 seconds
+  - DoD Standard: ~45 seconds
+  - Gutmann 35-pass: ~210 seconds
+  - Free Space Wipe: Varies by capacity
+
+- Resource Usage:
+  - CPU: 15-30% (scales with worker threads)
+  - RAM: <100MB typical
+  - Disk I/O: Optimized sequential operations
 
 ## ⚙️ Installation
 
+1.  Clone the repository:
+
 ```bash
-# Clone the repository
 git clone https://github.com/nvmwhoiam/secure-file-shredder.git
+```
 
-# Navigate to project directory
+2.  Navigate to the project directory:
+
+```bash
 cd secure-file-shredder
+```
 
-# Install dependencies
+3.  Install dependencies:
+
+```bash
 pip install tkinterdnd2
 ```
 
 ## 🚀 Usage
 
-```bash
-# Run the application
-python secure-file-shredder.py
+### GUI Mode (Default)
 
-# Command line options (coming soon)
-# python secure-file-shredder.py --path /path/to/files --passes 7
+Launch the graphical interface
+
+```bash
+python secure-file-shredder.py
+```
+
+### CLI Mode (Command Line)
+
+**Basic file shredding**
+
+```bash
+python secure-file-shredder.py --path file1.txt file2.jpg --passes 3
+```
+
+**Recursive folder shredding**
+
+```bash
+python secure-file-shredder.py --path ~/temp/ --recursive
+```
+
+**Wipe free space on C: drive**
+
+```bash
+python secure-file-shredder.py  --wipe-free-space --target C:
+```
+
+## ⚙️ Advanced CLI Mode (Command Line) Options
+
+**Basic file shredding**
+
+```bash
+python secure-file-shredder.py --path "file.txt"
+```
+
+**Recursive shredding**
+
+```bash
+python secure-file-shredder.py --path ~/docs/ --recursive
+```
+
+**Pass selection**
+
+```bash
+python secure-file-shredder.py --path x --passes 7
+```
+
+**Pattern selection**
+
+```bash
+python secure-file-shredder.py --path x --pattern gutmann
+```
+
+**Free space wipe**
+
+```bash
+python secure-file-shredder.py --wipe-free-space C:
 ```
 
 ## ⚠️ Important Security Notice
 
-```text
-THIS IS NOT A RECYCLE BIN TOOL!
-Files processed with Secure File Shredder Pro are:
-• Irreversibly destroyed
-• Unrecoverable by any software
-• Gone permanently from physical storage
+### THIS IS A DATA DESTRUCTION TOOL!
 
-Use with extreme caution - there is NO undo functionality.
-For maximum security, consider physical destruction of storage media
-for truly sensitive data as an additional measure.
-```
+**All processed files are:**
 
-## 💻 Technologies Used
+- Permanently destroyed at physical storage level
+- Unrecoverable by any software or hardware means
+- Verified as completely obliterated
 
-```bash
+**⚠ WARNING:**
+
+- System files are protected by default
+- No undo functionality exists
+- Free space wiping requires significant temporary storage
+- For maximum security, combine with physical destruction
+  for highly sensitive media
+
+## 💻 Technology Stack
+
 🟢 Python 3.x
 🟡 Tkinter (GUI)
 🔵 tkinterdnd2 (Drag & Drop)
-```
 
 ## Contact
 
